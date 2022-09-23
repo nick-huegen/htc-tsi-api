@@ -16,8 +16,9 @@ export class AnalogController {
     return new NotImplementedException();
   }
 
-  @Post('weird value')
-  async postFail(): Promise<NotImplementedException> {
+  @Post('setup')
+  async postSetup(): Promise<NotImplementedException> {
+    // repeat every second 20 times
     // await send request
     // return response (error or no)
     return new NotImplementedException();
