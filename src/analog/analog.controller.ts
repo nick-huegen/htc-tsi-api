@@ -4,7 +4,9 @@ import {
   NotImplementedException,
   Post,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Analog')
 @Controller('analog')
 export class AnalogController {
   @Post('success')

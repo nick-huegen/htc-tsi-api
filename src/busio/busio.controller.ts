@@ -1,5 +1,7 @@
-import { Controller, NotImplementedException, Post } from "@nestjs/common";
+import { Controller, NotImplementedException, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('BusIO')
 @Controller('busio')
 export class BusioController {
   @Post('success')
