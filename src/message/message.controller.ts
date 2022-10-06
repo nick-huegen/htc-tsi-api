@@ -1,12 +1,16 @@
 import { Controller, NotImplementedException, Param, Post } from "@nestjs/common";
 import { ApiTags } from '@nestjs/swagger';
+import { MessageModel } from "../model/MessageModel";
+import { MessageService } from "./message.service";
 
 @ApiTags('Message')
 @Controller('message')
 export class MessageController {
+  constructor(private messageService: MessageService) {}
+
   @Post('/:message')
-  async postBusIO(@Param('message') message): Promise<NotImplementedException> {
-    console.log(message);
-    return new NotImplementedException();
+  async postMessage(@Param('message') message): Promise<MessageModel> {
+    const messageModel = this.messageService.PushMessage(message);
+    return messageModel;
   }
 }

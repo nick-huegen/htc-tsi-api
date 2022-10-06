@@ -1,7 +1,7 @@
 import { MessageModel } from "../model/MessageModel";
 import { DataType } from "../model/DataType";
 
-export function JSONGenerator(datatype: string) {
+export function JSONGenerator(datatype: string): MessageModel {
   const messageModel = new MessageModel();
   messageModel.data_version = 1;
   messageModel.timestamp = new Date().toISOString();
@@ -14,4 +14,5 @@ export function JSONGenerator(datatype: string) {
     case "buisio": { messageModel.value = [8, 0, 209, 0, 0, 0, 144, 19, 0, 0, 0,]; break;}
   }
   messageModel.seq_number = 383569;
+  return messageModel;
 }
