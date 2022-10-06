@@ -6,7 +6,9 @@ dotenv.config();
 const connectionString = process.env['EVENTHUB_CONNECTION_STRING'] || '';
 const eventHubName = process.env['EVENTHUB_NAME'] || '';
 
-export async function EventPush(messageList: MessageModel[]): Promise<void> {
+export async function EventPush(
+  messageList: Array<MessageModel>,
+): Promise<void> {
   console.log(`Running send event`);
 
   const producer = new EventHubProducerClient(connectionString, eventHubName);
@@ -67,7 +69,7 @@ export async function EventPush(messageList: MessageModel[]): Promise<void> {
   console.log(`Exiting sendEvents sample`);
 }
 
-const messageModel: MessageModel[] = [];
+const messageModel: Array<MessageModel> = [];
 EventPush(messageModel).catch((error) => {
   console.error('Error running sample:', error);
 });

@@ -1,7 +1,7 @@
 import { MessageModel } from '../model/MessageModel';
 import { DataType } from '../model/DataType';
 
-export function JSONGenerator(datatype: string): MessageModel {
+export async function JSONGenerator(datatype: string): Promise<MessageModel> {
   const messageModel = new MessageModel();
   messageModel.data_version = 1;
   messageModel.timestamp = new Date().toISOString();
@@ -26,5 +26,6 @@ export function JSONGenerator(datatype: string): MessageModel {
     }
   }
   messageModel.seq_number = 383569;
+  await new Promise((f) => setTimeout(f, 1000));
   return messageModel;
 }

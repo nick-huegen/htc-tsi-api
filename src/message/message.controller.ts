@@ -9,7 +9,7 @@ export class MessageController {
   constructor(private messageService: MessageService) {}
 
   @Post('/:message')
-  async postMessage(@Param('message') message): Promise<MessageModel> {
+  async postMessage(@Param('message') message): Promise<Array<MessageModel>> {
     const messageModel = this.messageService.PushMessage(message);
     return messageModel;
   }
