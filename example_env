@@ -1,0 +1,13 @@
+API_PORT=3000
+
+# Used in most samples. Retrieve these values from an Event Hub in the Azure Portal.
+EVENTHUB_CONNECTION_STRING=<connection string WITHOUT an EntityPath>
+EVENTHUB_NAME=<name of a single eventhub>
+CONSUMER_GROUP_NAME=<name of a consumer group>
+
+IOTHUB_EH_COMPATIBLE_CONNECTION_STRING=<connection string with EntityPath>
+
+AZURE_CLIENT_ID=
+AZURE_TENANT_ID=
+AZURE_CLIENT_SECRET=
+EVENTHUB_FQDN=<your-eventhubs-namespace>.servicebus.windows.net
