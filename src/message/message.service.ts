@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MessageModel } from '../model/MessageModel';
 import { JSONGenerator } from '../helpers/JSONGenerator';
-import { DataType } from '../model/DataType';
 
 @Injectable()
 export class MessageService {

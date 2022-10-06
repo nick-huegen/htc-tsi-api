@@ -1,7 +1,12 @@
-import { Controller, NotImplementedException, Param, Post } from "@nestjs/common";
+import {
+  Controller,
+  NotImplementedException,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { MessageModel } from "../model/MessageModel";
-import { MessageService } from "./message.service";
+import { MessageModel } from '../model/MessageModel';
+import { MessageService } from './message.service';
 
 @ApiTags('Message')
 @Controller('message')
