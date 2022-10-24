@@ -1,10 +1,13 @@
 import { MessageModel } from '../model/MessageModel';
 import { DataType } from '../model/DataType';
 
-export async function JSONGenerator(datatype: string): Promise<MessageModel> {
+export async function JSONGenerator(
+  datatype: string,
+  increment: number,
+): Promise<MessageModel> {
   const messageModel = new MessageModel();
   messageModel.data_version = 1;
-  messageModel.timestamp = new Date().toISOString();
+  messageModel.timestamp = setTime(increment);
   messageModel.gateid = 'jaap5';
   messageModel.type = DataType[datatype];
   switch (datatype) {
@@ -17,7 +20,7 @@ export async function JSONGenerator(datatype: string): Promise<MessageModel> {
       break;
     }
     case 'cyclecounter': {
-      messageModel.value = 69955;
+      messageModel.value = 69955 + increment;
       break;
     }
     case 'buisio': {
@@ -26,6 +29,11 @@ export async function JSONGenerator(datatype: string): Promise<MessageModel> {
     }
   }
   messageModel.seq_number = 383569;
-  await new Promise((f) => setTimeout(f, 1000));
   return messageModel;
+}
+
+function setTime(i: number): string {
+  const time: Date = new Date();
+  time.setTime(time.getTime() + i * 20000);
+  return time.toISOString();
 }

@@ -19,48 +19,26 @@ export async function EventPush(
 
   try {
     const batchOptions = {};
-    let batch = await producer.createBatch(batchOptions);
+    const batch = await producer.createBatch(batchOptions);
     let numEventsSent = 0;
 
-    let i = 0;
-
-    while (i < eventsToSend.length) {
+    for (const event of eventsToSend) {
       // If message exists add it to a batch to send.
-      const isAdded = batch.tryAdd({ body: eventsToSend[i] });
+      const isAdded = batch.tryAdd({ body: event });
       if (isAdded) {
-        console.log(`Added eventsToSend[${i}] to the batch`);
-        ++i;
-        continue;
-      }
-      // Skips on faulty and big messages
-      if (batch.count === 0) {
-        console.log(
-          `Message was too large and can't be sent until it's made smaller. Skipping...`,
-        );
-        ++i;
+        console.log(`Added eventsToSend[${event}] to the batch`);
         continue;
       }
       console.log(
         `Batch is full - sending ${batch.count} messages as a single batch.`,
       );
-      await producer.sendBatch(batch);
-      numEventsSent += batch.count;
-      batch = await producer.createBatch(batchOptions);
-      if (batch.count > 0) {
-        console.log(
-          `Sending remaining ${batch.count} messages as a single batch.`,
-        );
-        await producer.sendBatch(batch);
-        numEventsSent += batch.count;
-      }
-
-      console.log(`Sent ${numEventsSent} events`);
-
-      if (numEventsSent !== eventsToSend.length) {
-        throw new Error(
-          `Not all messages were sent (${numEventsSent}/${eventsToSend.length})`,
-        );
-      }
+    }
+    await producer.sendBatch(batch);
+    numEventsSent += batch.count;
+    if (numEventsSent !== eventsToSend.length) {
+      throw new Error(
+        `Not all messages were sent (${numEventsSent}/${eventsToSend.length})`,
+      );
     }
   } catch (err: any) {
     console.log('Error when creating & sending a batch of events: ', err);
@@ -68,8 +46,3 @@ export async function EventPush(
   await producer.close();
   console.log(`Exiting sendEvents sample`);
 }
-
-const messageModel: Array<MessageModel> = [];
-EventPush(messageModel).catch((error) => {
-  console.error('Error running sample:', error);
-});

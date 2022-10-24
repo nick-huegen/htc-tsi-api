@@ -1,6 +1,6 @@
 export enum DataType {
-  analog,
-  busio,
-  cyclecounter,
-  display,
+  analog = 'analog',
+  busio = 'busio',
+  cyclecounter = 'cyclecounter',
+  display = 'display',
 }
