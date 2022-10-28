@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { MessageModel } from '../model/MessageModel';
 import { JSONGenerator } from '../helpers/JSONGenerator';
-import { ExceptionHandler } from '@nestjs/core/errors/exception-handler';
 import { EventPush } from '../helpers/EventPush';
+import { DataType } from '../model/DataType';
 
 @Injectable()
 export class MessageService {
-  async PushMessage(dataType: string): Promise<Array<MessageModel>> {
+  async PushMessage(dataType: DataType): Promise<Array<MessageModel>> {
     const messageList: Array<MessageModel> = [];
     for (let i = 0; i < 100; i++) {
       const newDataType: MessageModel = await JSONGenerator(dataType, i);
