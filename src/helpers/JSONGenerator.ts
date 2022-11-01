@@ -9,7 +9,7 @@ export async function JSONGenerator(
   const messageModel = new MessageModel();
   messageModel.data_version = 1;
   messageModel.timestamp = getTime(increment);
-  messageModel.gateid = 'Axel 1';
+  messageModel.gateid = 'Example gate';
   messageModel.type = datatype;
   messageModel.value = await DataGenerator(datatype);
   messageModel.seq_number = 383569;

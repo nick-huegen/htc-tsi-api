@@ -20,7 +20,10 @@ export class MessageController {
       DataType[
         Object.keys(DataType).find((type) => DataType[type] === message)
       ];
-    const messageModel = this.messageService.PushMessage(dataType);
+    let messageModel: Array<MessageModel> = new Array<MessageModel>();
+    if (dataType != undefined) {
+      messageModel = await this.messageService.PushMessage(dataType);
+    }
     return messageModel;
   }
 }
